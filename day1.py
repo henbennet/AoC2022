@@ -1,24 +1,17 @@
 import aocMain
 
-
 def main(inputlines):
-    values = [int(val) for val in inputlines]
-    part1 = 0
-    part2 = 0
+    elfs = []
+    for elf in (''.join(inputlines)).split('\n\n'):
+        elfC = 0
+        for c in elf.split('\n'):
+            elfC += int(c)
+        elfs.append(elfC)
+    elfs.sort()
 
-    for i, dist in enumerate(values):
-        if dist > values[i - 1]:
-            part1 += 1
-
-    prev = 0
-    for i, dist in enumerate(values):
-        if i - 2 >= 0:
-            current = dist + values[i - 1] + values[i - 2]
-            if 0 < prev < current:
-                part2 += 1
-            prev = current
+    part1 = elfs[-1]
+    part2 = elfs[-1]+elfs[-2]+elfs[-3]
 
     return part1, part2
-
 
 aocMain.runLines(main, "day1.txt")
